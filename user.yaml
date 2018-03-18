@@ -1,0 +1,11 @@
+var:
+  option:
+    ascii_punct: false
+    extended_charset: false
+    simplification: true
+  previously_selected_schema: double_pinyin
+  schema_access_time:
+    double_pinyin: 1520174283
+    my_coolest_ever_schema: 1520064603
+    wubi86: 1520055894
+    wubi_pinyin: 1520151517

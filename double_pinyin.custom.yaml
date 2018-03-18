@@ -1,0 +1,11 @@
+patch:
+  # reset值为0，切换输入法时默认中文输出
+  # reset值为1，切换输入法时默认英文输出
+  "switches/@0/reset": 1
+  # 取消双拼的全拼显示
+  "translator/preedit_format": false
+  # 以回车清楚编码，分号、单引号键选择2、3候选
+  "key_binder/bindings":
+  #  - { when: composing, accept: Return, send: Escape }
+    - { when: has_menu, accept: semicolon, send: 2 }
+    - { when: has_menu, accept: apostrophe, send: 3 }

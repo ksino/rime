@@ -1,0 +1,13 @@
+# Rime user dictionary
+#@/db_name	luna_pinyin_simp.userdb.kct
+#@/db_type	userdb
+#@/rime_version	1.1.2
+#@/tick	9
+#@/user_id	c35ff326-3a48-4b0a-bf55-c5625a9363c2
+de 	的	c=2 d=1.99501 t=9
+kan 	看	c=1 d=0.97531 t=9
+ke 	可	c=2 d=1.97516 t=9
+ru guo 	如果	c=1 d=0.960789 t=9
+shi 	是	c=1 d=0.965605 t=9
+si kao 	思考	c=1 d=0.980199 t=9
+zhe yang 	這樣	c=1 d=0.970446 t=9

@@ -1,0 +1,165 @@
+#本文件定义rime输入法的输入特性，包括输入方案，选词，按键，符号，快捷键等。
+#进行修改后重新部署小狼毫就会生效。
+
+patch:
+  schema_list:
+    #设定选用的输入方案。
+    # - {schema: luna_pinyin_simp}
+    - {schema: wubi_pinyin}
+    - {schema: double_pinyin}
+
+  menu:
+    #每页候选词数，默认为5个。0为每页10个候选词。
+    {page_size: 5}
+
+  #设定“方案选单”（输入方案选项）的快捷键
+  "switcher/hotkeys":
+    #grave就是键盘左上角，1左边的“~”按钮。
+    - "Control+grave"
+    - "Control+Shift+grave"
+    - F4
+
+  #符号。如果启用了symbol.yaml（就是可以用/FH输入特殊符号），则在symbol.yaml中进行修改。
+  "punctuator/half_shape": #这部分定义[半角]输入状态时，输入各个符号后的效果。
+    "!": {commit: "！"}
+    "\"": {pair: ["“", "”"]} #pair表示上引号和下引号是配对出现的。
+    "#": "#"
+    "$": ["￥", "$", "€", "£", "¥", "¢", "¤"]
+    "%": ["%", "％", "°", "℃"]
+    "&": "&"
+    "'": {pair: ["‘", "’"]}
+    "(": "（"
+    ")": "）"
+    "*": ["*", "＊", "·", "・", "×", "※", "❂"]
+    "+": "+"
+    ",": {commit: "，"}
+    "-": "-"
+    .: {commit: "。"}
+    "/": ["、", "/", "／", "÷"]
+    ":": {commit: "："}
+    ";": {commit: "；"}
+    "<": ["《", "〈", "«", "‹"]
+    "=": "="
+    ">": ["》", "〉", "»", "›"]
+    "?": {commit: "？"}
+    "@": "@"
+    "[": ["「", "【", "〔", "［"]
+    "\\": ["、", "\\", "＼"]
+    "]": ["」", "】", "〕", "］"]
+    "^": {commit: "……"}
+    _: "——"
+    "`": "`"
+    "{": ["『", "〖", "｛"]
+    "|": ["·", "|", "｜", "§", "¦"]
+    "}": ["』", "〗", "｝"]
+    "~": ["~", "～"]
+  "punctuator/full_shape": #这部分定义[全角]输入状态时，输入各个符号后的效果。
+    " ": {commit: "　"}
+    "!": {commit: "！"}
+    "\"": {pair: ["“", "”"]}
+    "#": ["＃", "⌘"]
+    "$": ["￥", "$", "€", "£", "¥", "¢", "¤"]
+    "%": ["％", "°", "℃"]
+    "&": "＆"
+    "'": {pair: ["‘", "’"]}
+    "(": "（"
+    ")": "）"
+    "*": ["＊", "·", "・", "×", "※", "❂"]
+    "+": "＋"
+    ",": {commit: "，"}
+    "-": "－"
+    .: {commit: "。"}
+    "/": ["／", "÷"]
+    ":": {commit: "："}
+    ";": {commit: "；"}
+    "<": ["《", "〈", "«", "‹"]
+    "=": "＝"
+    ">": ["》", "〉", "»", "›"]
+    "?": {commit: "？"}
+    "@": ["＠", "☯"]
+    "[": ["「", "【", "〔", "［"]
+    "\\": ["、", "＼"]
+    "]": ["」", "】", "〕", "］"]
+    "^": {commit: "……"}
+    _: "——"
+    "`": "｀"
+    "{": ["『", "〖", "｛"]
+    "|": ["·", "｜", "§", "¦"]
+    "}": ["』", "〗", "｝"]
+    "~": "～"
+
+  #这里设定中英文切换相关内容
+  "ascii_composer/good_old_caps_lock": true
+  "ascii_composer/switch_key":
+    #
+    #注：
+    #RIME默认情况下，在输入中文时按下Shift键会临时切换到英文状态，回车输入英文后恢复中文输入状态。
+    #如果你想要Shift键直接上屏，之后切换为英文输入。有的或是用Control键进行切换。如此种种都可实现。
+    #参数：
+    #clear为“清除输入的拼音，并切换到英文”
+    #noop为“无操作”
+    #commit_text为“将已输入文字上屏，并切换英文”
+    #inline_ascii为“保留输入的拼音，切换为英文。”
+    #具体试试就知道了。j这是
+    #
+    Caps_Lock: clear #大小写切换键
+    Control_L: noop #左ctrl
+    Control_R: noop #右ctrl
+    Return: clear
+    Eisu_toggle: clear # 日文键盘的「英数」转换键
+    Shift_L: inline_ascii #左shift
+    # Shift_R: commit_text #右shift我
+    Shift_R: commit_code #右shift
+    # Shift_R: clear #右shift
+
+
+
+  #
+  #快捷键
+  #
+  key_binder:
+    bindings:
+    #详细说明有待撰写。
+    #重新设置Return, Controg+g
+    # 已经在对应输入法中设置回车键为清空编码
+      # - {accept: "Return", send: Escape, when: composing}
+      # - {accept: "Control+g", send: Return, when: composing}
+      - {accept: "Control+g", send: Escape, when: composing}
+      - {accept: "Control+p", send: Up, when: composing} #ctrl+p，相当于按向上键
+      - {accept: "Control+n", send: Down, when: composing} #向下
+      - {accept: "Control+b", send: Left, when: composing} #向左
+      - {accept: "Control+f", send: Right, when: composing} #向右。以上几个都是操作输入法选词框
+      - {accept: "Control+a", send: Home, when: composing} #相当于Home键
+      - {accept: "Control+e", send: End, when: composing} #相当于End。这两个的效果是切换到你输入的英文的开头或结尾。
+      - {accept: "Control+d", send: Delete, when: composing}
+      - {accept: "Control+k", send: "Shift+Delete", when: composing}
+      - {accept: "Control+h", send: BackSpace, when: composing}
+      - {accept: "Control+bracketleft", send: Escape, when: composing}
+      - {accept: "Alt+v", send: Page_Up, when: composing}
+      - {accept: "Control+v", send: Page_Down, when: composing}
+      - {accept: ISO_Left_Tab, send: Page_Up, when: composing}
+      - {accept: "Shift+Tab", send: Page_Up, when: composing}
+      - {accept: Tab, send: Page_Down, when: composing}
+      - {accept: minus, send: Page_Up, when: has_menu} #减号
+      - {accept: equal, send: Page_Down, when: has_menu} #等号
+      - {accept: comma, send: Page_Up, when: paging} #逗号
+      - {accept: period, send: Page_Down, when: has_menu} #句号
+      - {accept: "Control+Shift+1", select: .next, when: always}
+      - {accept: "Control+Shift+2", toggle: ascii_mode, when: always}
+      - {accept: "Control+Shift+3", toggle: full_shape, when: always}
+      - {accept: "Control+Shift+4", toggle: simplification, when: always}
+      - {accept: "Control+Shift+5", toggle: extended_charset, when: always}
+      - {accept: "Control+Shift+exclam", select: .next, when: always} #ctrl+shift+1
+      - {accept: "Control+Shift+at", toggle: ascii_mode, when: always} #ctrl+shift+2，中英切换
+      - {accept: "Control+Shift+numbersign", toggle: full_shape, when: always} #ctrl+shift+3，全角半角切换
+      - {accept: "Control+Shift+dollar", toggle: simplification, when: always} #ctrl+shift+4，繁简切换
+      - {accept: "Control+Shift+percent", toggle: extended_charset, when: always} #ctrl+shift+5，扩展字符集
+      - {accept: "Shift+space", toggle: full_shape, when: always} #shift+空格，全角半角切换
+      - {accept: "Control+period", toggle: ascii_punct, when: always} #ctrl+句号，中英标点切换
+
+
+  recognizer:
+    patterns:
+      email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+      uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+      url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
